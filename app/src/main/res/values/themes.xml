@@ -2,8 +2,24 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.HitwhCampusApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/my_theme</item>
     </style>
 
     <style name="Theme.HitwhCampusApp" parent="Base.Theme.HitwhCampusApp" />
+
+    <style name="Base.theme.BottomNavigation" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/my_theme</item>
+
+        <item name="colorPrimaryVariant">@color/my_theme</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/my_theme</item>
+        <item name="colorSecondaryVariant">@color/my_theme</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="theme.BottomNavigation" parent="Base.theme.BottomNavigation"/>
+
 </resources>
