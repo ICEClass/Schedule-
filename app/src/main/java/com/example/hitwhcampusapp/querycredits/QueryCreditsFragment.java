@@ -23,13 +23,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 2025.3.17
+ * 王鑫菲
+ * 注意里面的注释
+ * 注释里有标出哪些地方需要更改，哪些地方不需要更改，没有注释的地方不需要更改
+ */
+
 public class QueryCreditsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private CreditAdapter creditAdapter;
     private RecyclerView recyclerView;
-    private double selectTerm;
-    // selectTerm用于控制是哪个学期，1.0为大一上学期，1.5为大一下学期，2.0为大二上学期……4.0为大四上学期，4.5为大四下学期
+    private int selectTerm;
+    /* selectTerm用于控制是哪个学期，
+        1为大一上学期，2为大一下学期，3为大一夏季学期，
+        4为大二上学期，5为大二下学期，6为大二夏季学期，
+        7为大三上学期，8为大三下学期，9为大三夏季学期，
+        10为大四上学期，11为大四下学期，不需要更改
+     */
+    private int currentTerm;
+    // currentTerm指的是现在所在的学期（如2024春，2025秋等等），需要将selectTerm与currentTerm对应起来，不需要更改
     private List<Credit> creditList = new ArrayList<>();
+
+    // 以下是固定定义，需要随时间改变，只记录了四个学期，不需要更改
+    final static String CURRENT_TERM = "2025春季学期";
+    final static String LAST_TERM = "2024秋季学期";
+    final static String L_LAST_TERM = "2024夏季学期";
+    final static String L_L_LAST_TERM = "2024春季学期";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,12 +67,17 @@ public class QueryCreditsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // 初始化学分数据
+        // 初始化学分数据，这个函数内部需要更改
         initCreditList();
 
-        // 设置spinner
+        // 设置spinner，不需要更改
         Spinner spinner = (Spinner) getActivity().findViewById(R.id.query_credits_spinner);
-        List<String> options = Arrays.asList("option1", "option2", "option3");
+        List<String> options = new ArrayList<>(); // 倒序，不需要更改
+        options.add(CURRENT_TERM);
+        if (currentTerm - 1 >= 1) options.add(LAST_TERM);
+        if (currentTerm - 2 >= 1) options.add(L_LAST_TERM);
+        if (currentTerm - 3 >= 1) options.add(L_L_LAST_TERM);
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, options);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
@@ -61,18 +86,18 @@ public class QueryCreditsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectItem = options.get(position);
 
-                // 选择selectItem时的操作
+                // 选择selectItem时的操作，不需要更改
                 selectOptions(selectItem);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // 什么都不选的逻辑
-                selectOptions("option1");
+                // 什么都不选的逻辑，不需要更改
+                selectOptions(CURRENT_TERM);
             }
         });
 
-        // 设置列表的RecyclerView
+        // 设置列表的RecyclerView，不需要更改
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.query_credits_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -80,7 +105,7 @@ public class QueryCreditsFragment extends Fragment {
         creditAdapter = new CreditAdapter(getActivity(), creditList, selectTerm);
         recyclerView.setAdapter(creditAdapter);
 
-        // 设置下拉刷新功能
+        // 设置下拉刷新功能，不需要更改
         swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.query_credits_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -91,91 +116,75 @@ public class QueryCreditsFragment extends Fragment {
     }
 
 
-    // 设置刷新逻辑
+    // 设置刷新逻辑，不需要更改
     public void updateList() {
-        // 以下为刷新动画期间代码逻辑
+        // 以下为刷新动画期间代码逻辑，不需要更改
 
-        // 更新adapter
+        // 更新adapter，不需要更改
         creditAdapter.setSelectTerm(selectTerm);
         creditAdapter.notifyDataSetChanged();
-        // 控制刷新动画结束
+        // 控制刷新动画结束，不需要更改
         swipeRefreshLayout.setRefreshing(false);
     }
 
 
-    // 设置选择逻辑
+    // 设置选择逻辑，不需要更改
     public void selectOptions(String selectItem) {
         swipeRefreshLayout.setRefreshing(true);
 
-        if (selectItem.equals("option1")) {
-            selectTerm = 1.0;
+        if (selectItem.equals(CURRENT_TERM)) {
+            selectTerm = currentTerm;
         }
-        else if (selectItem.equals("option2")) {
-            selectTerm = 1.5;
+        else if (selectItem.equals(LAST_TERM)) {
+            selectTerm = currentTerm - 1;
         }
-        else if (selectItem.equals("option3")) {
-            selectTerm = 2.0;
+        else if (selectItem.equals(L_LAST_TERM)) {
+            selectTerm = currentTerm - 2;
+        }
+        else if (selectItem.equals(L_L_LAST_TERM)) {
+            selectTerm = currentTerm - 3;
         }
         updateList();
     }
 
-    // 初始化学分
+    // 初始化学分，需要更改
     public void initCreditList() {
-        // 设置日常行为学分
+        // 将selectTerm与currentTerm对应起来，以23级为例，目前是2025春，对于我们来说是大二下学期，即5，需要根据用户更改
+        currentTerm = 5;
+
+        /* setTermCredit的第一个参数用于控制是哪个学期，
+            1为大一上学期，2为大一下学期，3为大一夏季学期，
+            4为大二上学期，5为大二下学期，6为大二夏季学期，
+            7为大三上学期，8为大三下学期，9为大三夏季学期，
+            10为大四上学期，11为大四下学期
+            为了调试，我这里用for把所有学期修的该分数都设为1.0，到时候需要从服务器上拿取数据，需要更改
+        */
+        // 设置日常行为学分，需要更改
         Credit creditDaily = new Credit("日常行为学分", 10);
-        creditDaily.setFirstTermFirst(1.0); // 大一上学期
-        creditDaily.setFirstTermSecond(2.0); // 大一下学期
-        creditDaily.setSecondTermFirst(2.5); // 大二上学期
-        creditDaily.setSecondTermSecond(2.0); // 大二下学期
-        creditDaily.setThirdTermFirst(2.0); // 大三上学期
-        creditDaily.setThirdTermSecond(1.0); // 大三下学期
-        creditDaily.setForthTermFirst(1.0); // 大四上学期
-        creditDaily.setForthTermSecond(1.0); // 大四下学期
+        for (int i = 1; i <= 11; ++i)
+            creditDaily.setTermCredit(i, 1.0);
 
-        // 设置创新创业学分
+        // 设置创新创业学分，需要更改
         Credit creditInnovative = new Credit("创新创业学分", 10);
-        creditInnovative.setFirstTermFirst(1.0); // 大一上学期
-        creditInnovative.setFirstTermSecond(2.0); // 大一下学期
-        creditInnovative.setSecondTermFirst(2.5); // 大二上学期
-        creditInnovative.setSecondTermSecond(2.0); // 大二下学期
-        creditInnovative.setThirdTermFirst(2.0); // 大三上学期
-        creditInnovative.setThirdTermSecond(1.0); // 大三下学期
-        creditInnovative.setForthTermFirst(1.0); // 大四上学期
-        creditInnovative.setForthTermSecond(1.0); // 大四下学期
+        for (int i = 1; i <= 11; ++i)
+            creditInnovative.setTermCredit(i, 1.0);
 
-        // 设置社会实践学分
+        // 设置社会实践学分，需要更改
         Credit creditSociety = new Credit("社会实践学分", 10);
-        creditSociety.setFirstTermFirst(1.0); // 大一上学期
-        creditSociety.setFirstTermSecond(2.0); // 大一下学期
-        creditSociety.setSecondTermFirst(2.5); // 大二上学期
-        creditSociety.setSecondTermSecond(2.0); // 大二下学期
-        creditSociety.setThirdTermFirst(2.0); // 大三上学期
-        creditSociety.setThirdTermSecond(1.0); // 大三下学期
-        creditSociety.setForthTermFirst(1.0); // 大四上学期
-        creditSociety.setForthTermSecond(1.0); // 大四下学期
+        for (int i = 1; i <= 11; ++i)
+            creditSociety.setTermCredit(i, 1.0);
 
-        // 设置文化素质学分
+        // 设置文化素质学分，需要更改
         Credit creditCulture = new Credit("文化素质学分", 10);
-        creditCulture.setFirstTermFirst(1.0); // 大一上学期
-        creditCulture.setFirstTermSecond(2.0); // 大一下学期
-        creditCulture.setSecondTermFirst(2.5); // 大二上学期
-        creditCulture.setSecondTermSecond(2.0); // 大二下学期
-        creditCulture.setThirdTermFirst(2.0); // 大三上学期
-        creditCulture.setThirdTermSecond(1.0); // 大三下学期
-        creditCulture.setForthTermFirst(1.0); // 大四上学期
-        creditCulture.setForthTermSecond(1.0); // 大四下学期
+        for (int i = 1; i <= 11; ++i)
+            creditCulture.setTermCredit(i, 1.0);
 
-        // 设置外专业选修学分
+        // 设置外专业选修学分，需要更改
         Credit creditOther = new Credit("外专业选修学分", 10);
-        creditOther.setFirstTermFirst(1.0); // 大一上学期
-        creditOther.setFirstTermSecond(2.0); // 大一下学期
-        creditOther.setSecondTermFirst(2.5); // 大二上学期
-        creditOther.setSecondTermSecond(2.0); // 大二下学期
-        creditOther.setThirdTermFirst(2.0); // 大三上学期
-        creditOther.setThirdTermSecond(1.0); // 大三下学期
-        creditOther.setForthTermFirst(1.0); // 大四上学期
-        creditOther.setForthTermSecond(1.0); // 大四下学期
+        for (int i = 1; i <= 11; ++i)
+            creditOther.setTermCredit(i, 1.0);
 
+        // 将学分加入List，不需要更改
         creditList.add(creditDaily);
         creditList.add(creditInnovative);
         creditList.add(creditSociety);

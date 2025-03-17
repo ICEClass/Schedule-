@@ -17,7 +17,7 @@ import java.util.List;
 public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder> {
     private Context mContext;
     private List<Credit> mCreditList;
-    private double mSelectTerm;
+    private int mSelectTerm;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View creditView;
@@ -37,13 +37,13 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
             creditProgress = (TextView) view.findViewById(R.id.credit_item_progress);
         }
     }
-    public CreditAdapter(Context context, List<Credit> creditList, double selectTerm) {
+    public CreditAdapter(Context context, List<Credit> creditList, int selectTerm) {
         mContext = context;
         mCreditList = creditList;
         mSelectTerm = selectTerm;
     }
 
-    public void setSelectTerm(double selectTerm) {
+    public void setSelectTerm(int selectTerm) {
         mSelectTerm = selectTerm;
     }
 
@@ -71,16 +71,8 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
 
         holder.creditName.setText(credit.getName());
         holder.creditSum.setText("" + credit.getSum());
-
-        if (mSelectTerm == 1.0) holder.creditTerm.setText("" + credit.getFirstTermFirst());
-        else if (mSelectTerm == 1.5) holder.creditTerm.setText("" + credit.getFirstTermSecond());
-        else if (mSelectTerm == 2.0) holder.creditTerm.setText("" + credit.getSecondTermFirst());
-        else if (mSelectTerm == 2.5) holder.creditTerm.setText("" + credit.getSecondTermSecond());
-        else if (mSelectTerm == 3.0) holder.creditTerm.setText("" + credit.getThirdTermFirst());
-        else if (mSelectTerm == 3.5) holder.creditTerm.setText("" + credit.getThirdTermSecond());
-        else if (mSelectTerm == 4.0) holder.creditTerm.setText("" + credit.getForthTermFirst());
-        else if (mSelectTerm == 4.5) holder.creditTerm.setText("" + credit.getForthTermSecond());
-
+        if (mSelectTerm >= 1 && mSelectTerm <= 11)
+            holder.creditTerm.setText("" + credit.getTermCredit(mSelectTerm));
         holder.creditNeed.setText("" + credit.getNeed());
         holder.creditProgress.setText("" + credit.getProgress() + "%");
     }
