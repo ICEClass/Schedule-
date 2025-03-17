@@ -2,7 +2,6 @@ package com.example.hitwhcampusapp.querycredits;
 
 public class Credit {
     private String name;
-    private double sum;
     private double firstTermFirst;
     private double firstTermSecond;
     private double secondTermFirst;
@@ -12,22 +11,10 @@ public class Credit {
     private double forthTermFirst;
     private double forthTermSecond;
     private double need;
-    private double progress;
 
-    public Credit(String name, double firstTermFirst, double firstTermSecond, double secondTermFirst, double secondTermSecond, double thirdTermFirst, double thirdTermSecond, double forthTermFirst, double forthTermSecond, double need) {
+    public Credit(String name, double need) {
         this.name = name;
-        this.firstTermFirst = firstTermFirst;
-        this.firstTermSecond = firstTermSecond;
-        this.secondTermFirst = secondTermFirst;
-        this.secondTermSecond = secondTermSecond;
-        this.thirdTermFirst = thirdTermFirst;
-        this.thirdTermSecond = thirdTermSecond;
-        this.forthTermFirst = forthTermFirst;
-        this.forthTermSecond = forthTermSecond;
         this.need = need;
-
-        this.sum = this.firstTermFirst + this.firstTermSecond + this.secondTermFirst + this.secondTermSecond + this.thirdTermFirst + this.thirdTermSecond + this.forthTermFirst + this.forthTermFirst;
-        this.progress = this.sum * 100 / this.need;
     }
 
     public String getName() {
@@ -47,19 +34,11 @@ public class Credit {
     }
 
     public double getProgress() {
-        return progress;
-    }
-
-    public void setProgress(double progress) {
-        this.progress = progress;
+        return getSum() * 100 / need;
     }
 
     public double getSum() {
-        return sum;
-    }
-
-    public void setSum(double sum) {
-        this.sum = sum;
+        return firstTermFirst + firstTermSecond + secondTermFirst + secondTermSecond + thirdTermFirst + thirdTermSecond + forthTermFirst + forthTermFirst;
     }
 
     public double getFirstTermFirst() {
