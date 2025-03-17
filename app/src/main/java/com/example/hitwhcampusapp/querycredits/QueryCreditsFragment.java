@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,17 @@ import android.widget.Spinner;
 
 import com.example.hitwhcampusapp.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class QueryCreditsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
-    private List<Credit> creditList;
     private CreditAdapter creditAdapter;
+    private RecyclerView recyclerView;
+    private double selectTerm;
+    // selectTerm用于控制是哪个学期，1.0为大一上学期，1.5为大一下学期，2.0为大二上学期……4.0为大四上学期，4.5为大四下学期
+    private List<Credit> creditList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class QueryCreditsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        // 初始化学分数据
         initCreditList();
 
         // 设置spinner
@@ -73,9 +77,8 @@ public class QueryCreditsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        creditAdapter = new CreditAdapter(getActivity(), creditList, 1.0);
+        creditAdapter = new CreditAdapter(getActivity(), creditList, selectTerm);
         recyclerView.setAdapter(creditAdapter);
-
 
         // 设置下拉刷新功能
         swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.query_credits_swipe_refresh_layout);
@@ -91,8 +94,6 @@ public class QueryCreditsFragment extends Fragment {
     // 设置刷新逻辑
     public void updateList() {
         // 以下为刷新动画期间代码逻辑
-        double selectTerm = 1.0;
-        // selectTerm用于控制是哪个学期，1.0为大一上学期，1.5为大一下学期，2.0为大二上学期……4.0为大四上学期，4.5为大四下学期
 
         // 更新adapter
         creditAdapter.setSelectTerm(selectTerm);
@@ -104,15 +105,18 @@ public class QueryCreditsFragment extends Fragment {
 
     // 设置选择逻辑
     public void selectOptions(String selectItem) {
-        if (selectItem.equals("option1")) {
+        swipeRefreshLayout.setRefreshing(true);
 
+        if (selectItem.equals("option1")) {
+            selectTerm = 1.0;
         }
         else if (selectItem.equals("option2")) {
-
+            selectTerm = 1.5;
         }
         else if (selectItem.equals("option3")) {
-
+            selectTerm = 2.0;
         }
+        updateList();
     }
 
     // 初始化学分

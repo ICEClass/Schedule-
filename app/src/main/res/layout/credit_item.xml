@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -46,11 +46,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.57" />
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="2dp"
+        android:layout_height="2.5dp"
         android:background="@drawable/dashed_line"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,21 +74,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.84" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.30" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.70" />
 
     <TextView
         android:id="@+id/credit_item_sum"
@@ -169,20 +169,21 @@
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
         android:text="已修进度"
-
+        android:textColor="#8C8B8B"
         app:layout_constraintEnd_toStartOf="@+id/guideline10"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
     <ImageButton
         android:id="@+id/credit_item_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/more"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        android:src="@drawable/more"
+        android:paddingRight="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,7 +82,7 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
         else if (mSelectTerm == 4.5) holder.creditTerm.setText("" + credit.getForthTermSecond());
 
         holder.creditNeed.setText("" + credit.getNeed());
-        holder.creditProgress.setText("" + credit.getProgress());
+        holder.creditProgress.setText("" + credit.getProgress() + "%");
     }
 
     @Override
