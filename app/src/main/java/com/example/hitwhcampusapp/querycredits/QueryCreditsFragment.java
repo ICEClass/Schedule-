@@ -25,6 +25,7 @@ public class QueryCreditsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private List<Credit> creditList;
+    private CreditAdapter creditAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,8 +70,8 @@ public class QueryCreditsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-//        adapter = new RecordAdapter(getActivity(), selectRecordList);
-//        recyclerView.setAdapter(adapter);
+        creditAdapter = new CreditAdapter(getActivity(), creditList);
+        recyclerView.setAdapter(creditAdapter);
 
 
         // 设置下拉刷新功能
@@ -106,4 +107,6 @@ public class QueryCreditsFragment extends Fragment {
 
         }
     }
+
+    
 }
