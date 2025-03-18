@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.hitwhcampusapp.R;
 
@@ -28,6 +29,7 @@ import java.util.List;
  * 王鑫菲
  * 注意里面的注释
  * 注释里有标出哪些地方需要更改，哪些地方不需要更改，没有注释的地方不需要更改
+ * 这个fragment里面有需要更改的地方
  */
 
 public class QueryCreditsFragment extends Fragment {
@@ -66,6 +68,10 @@ public class QueryCreditsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // 对右上角用户头像UI进行更改，需要根据用户登录状态等来更改
+        TextView userImage = (TextView) getActivity().findViewById(R.id.query_credits_user_image);
+        userImage.setText("威");
 
         // 初始化学分数据，这个函数内部需要更改
         initCreditList();
@@ -152,7 +158,9 @@ public class QueryCreditsFragment extends Fragment {
         // 将selectTerm与currentTerm对应起来，以23级为例，目前是2025春，对于我们来说是大二下学期，即5，需要根据用户更改
         currentTerm = 5;
 
-        /* setTermCredit的第一个参数用于控制是哪个学期，
+        /* Credit第一个参数name是该学分种类名字，不需要更改，第二个参数need是该学分种类需要多少分才算修满
+            setTermCredit的第一个参数term用于控制是哪个学期，第二个参数credit指的是给该学期该分数设置为多少分
+
             1为大一上学期，2为大一下学期，3为大一夏季学期，
             4为大二上学期，5为大二下学期，6为大二夏季学期，
             7为大三上学期，8为大三下学期，9为大三夏季学期，

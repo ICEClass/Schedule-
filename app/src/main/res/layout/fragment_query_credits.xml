@@ -14,7 +14,7 @@
         app:layout_constraintGuide_percent="0.12" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/mine_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/colors"
@@ -67,8 +67,8 @@
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="@+id/mine_background"
+        app:layout_constraintStart_toStartOf="@+id/mine_background"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -86,7 +86,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/mine_background">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/query_credits_recycler_view"
@@ -120,7 +120,7 @@
         android:paddingRight="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/mine_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
@@ -152,6 +152,6 @@
         android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/mine_background" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

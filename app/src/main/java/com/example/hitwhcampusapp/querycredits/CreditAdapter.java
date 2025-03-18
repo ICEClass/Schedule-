@@ -14,6 +14,12 @@ import com.example.hitwhcampusapp.R;
 
 import java.util.List;
 
+/**
+ * 2025.3.17
+ * 王鑫菲
+ * 这个adapter没有需要更改的地方
+ */
+
 public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder> {
     private Context mContext;
     private List<Credit> mCreditList;
