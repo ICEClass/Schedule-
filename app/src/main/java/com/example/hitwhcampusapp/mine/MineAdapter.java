@@ -14,6 +14,11 @@ import com.example.hitwhcampusapp.R;
 
 import java.util.List;
 
+/**
+ * 2025.3.18
+ * 王鑫菲
+ * 需要更改
+ */
 public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
     private List<Mine> mMineList;
     private Context mContext;
@@ -45,6 +50,8 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.ViewHolder> {
                 if (position != RecyclerView.NO_POSITION) {
                     Mine mine = mMineList.get(position);
                     String option = mine.getName();
+
+                    // 以下为我的界面里的选择列表逻辑，需要更改
                     if (option.equals("我的积分")) {
 
                     }

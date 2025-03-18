@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/bottom_nav_home"
-        android:title="home"/>
+        android:id="@+id/bottom_nav_query_credits"
+        android:icon="@drawable/query_credits"
+        android:title="学分"/>
+
+    <item
+        android:id="@+id/bottom_nav_mine"
+        android:icon="@drawable/mine"
+        android:title="我的"/>
 
 </menu>

@@ -105,7 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mine_user_image" />
 
     <TextView
-        android:id="@+id/mine_user_student_ID"
+        android:id="@+id/mine_user_information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2023级 软件工程"

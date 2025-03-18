@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.hitwhcampusapp.R;
 
@@ -20,6 +21,7 @@ import java.util.List;
 /**
  * 2025.3.17
  * 王鑫菲
+ * 需要更改
  */
 
 public class MineFragment extends Fragment {
@@ -42,6 +44,19 @@ public class MineFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // 对用户名，头像等信息进行设置，需要更改
+
+        // 头像
+        TextView userImage = (TextView) getActivity().findViewById(R.id.mine_user_image);
+        userImage.setText("威");
+        // 用户名
+        TextView userName = (TextView) getActivity().findViewById(R.id.mine_user_name);
+        userName.setText("哈哈");
+        // 级部专业信息
+        TextView userInformation = (TextView) getActivity().findViewById(R.id.mine_user_information);
+        userInformation.setText("2023级" + " " + "软件工程");
+
+        // 添加列表，其中需要更改的选择逻辑在MineAdapter，不需要更改
         initMines();
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.mine_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -49,8 +64,28 @@ public class MineFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         MineAdapter mineAdapter = new MineAdapter(getActivity(), mineList);
         recyclerView.setAdapter(mineAdapter);
+
+        // 对按钮进行逻辑设置，需要更改
+        // 设置按钮
+        TextView settings = (TextView) getActivity().findViewById(R.id.mine_settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        // 夜间按钮
+        TextView nights = (TextView) getActivity().findViewById(R.id.mine_nights);
+        nights.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
+    // 初始化列表，不需要更改
     void initMines() {
         Mine myPoints = new Mine(R.drawable.points, "我的积分");
         mineList.add(myPoints);
