@@ -27,7 +27,7 @@
         android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/background_frame_radius_grey"
+        android:background="@drawable/background_frame_background_radius_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +131,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/grey"
+        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,11 +148,22 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:elevation="4dp"
         android:background="@drawable/background_frame_white_radius"
         app:layout_constraintBottom_toTopOf="@+id/guideline19"
         app:layout_constraintEnd_toStartOf="@+id/guideline21"
         app:layout_constraintStart_toStartOf="@+id/guideline20"
         app:layout_constraintTop_toBottomOf="@+id/mine_background" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mine_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline19"
+        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+        app:layout_constraintStart_toStartOf="@+id/guideline20"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
@@ -187,6 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="设置"
+        android:textColor="@color/darker_grey"
         android:textStyle="bold"
         android:drawableTop="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -199,24 +211,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="夜间"
+        android:textColor="@color/darker_grey"
         android:textStyle="bold"
         android:drawableTop="@drawable/nights"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline23"
         app:layout_constraintStart_toStartOf="@+id/guideline22"
         app:layout_constraintTop_toTopOf="@+id/guideline19" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mine_recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline19"
-        app:layout_constraintEnd_toStartOf="@+id/guideline21"
-        app:layout_constraintStart_toStartOf="@+id/guideline20"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

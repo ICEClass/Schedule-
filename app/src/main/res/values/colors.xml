@@ -4,7 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#EBE9E9</color>
     <color name="dark_grey">#B8B8B8</color>
+    <color name="darker_grey">#4E4E4E</color>
     <color name="blue">#2155F3</color>
     <color name="red">#E4190E</color>
     <color name="my_theme">#6EBFF8</color>
+    <color name="background">#EAEFF2</color>
 </resources>
