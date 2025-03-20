@@ -30,15 +30,15 @@ public class MainActivity extends AppCompatActivity {
         //初始化控件
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav);
 
-        //默认第一页被选中
-        selectedFragment(0);
+        //默认学分被选中
+        selectedFragment(1);
 
         //点击底部导航栏按钮切换界面
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.bottom_nav_query_credits) selectedFragment(0);
-                else if (item.getItemId() == R.id.bottom_nav_mine) selectedFragment(1);
+                if (item.getItemId() == R.id.bottom_nav_query_credits) selectedFragment(1);
+                else if (item.getItemId() == R.id.bottom_nav_mine) selectedFragment(4);
                 return true;
             }
         });
@@ -49,13 +49,22 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideFragment(transaction);
         if (position == 0) {
+
+        }
+        else if (position == 1) {
             if (queryCreditsFragment == null) {
                 queryCreditsFragment = new QueryCreditsFragment();
                 transaction.add(R.id.frame_content, queryCreditsFragment);
             }
             else transaction.show(queryCreditsFragment);
         }
-        else if (position == 1) {
+        else if (position == 2) {
+
+        }
+        else if (position == 3) {
+
+        }
+        else if (position == 4) {
             if (mineFragment == null) {
                 mineFragment = new MineFragment();
                 transaction.add(R.id.frame_content, mineFragment);
