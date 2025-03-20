@@ -47,7 +47,7 @@ public class MineFragment extends Fragment {
         // 对用户名，头像等信息进行设置，需要更改
 
         // 头像
-        TextView userImage = (TextView) getActivity().findViewById(R.id.mine_user_image);
+        TextView userImage = (TextView) getActivity().findViewById(R.id.login_logo);
         userImage.setText("威");
         // 用户名
         TextView userName = (TextView) getActivity().findViewById(R.id.mine_user_name);
