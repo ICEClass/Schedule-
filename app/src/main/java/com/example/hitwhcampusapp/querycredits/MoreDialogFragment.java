@@ -5,16 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoreDialogFragment extends DialogFragment {
+    private static final String REQUEST_KEY = "dialog_result_key"; // 请求键
     private SwipeRefreshLayout swipeRefreshLayout;
     private CreditMoreAdapter creditMoreAdapter;
     private RecyclerView recyclerView;
@@ -46,7 +45,7 @@ public class MoreDialogFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // 设置UI
-        TextView moreName = (TextView) view.findViewById(R.id.query_credits_more_name);
+        TextView moreName = (TextView) view.findViewById(R.id.query_credits_more_add_credit_name);
         moreName.setText(mCredit.getName());
 
         // 初始化明细数据，这个函数内部需要更改
@@ -58,12 +57,32 @@ public class MoreDialogFragment extends DialogFragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AddCreditFragment addCreditFragment = new AddCreditFragment(mCredit);
+                addCreditFragment.show(getParentFragmentManager(), "AddCreditFragment");
+            }
+        });
 
+        // 设置结果监听器
+        getParentFragmentManager().setFragmentResultListener(REQUEST_KEY, this, (requestKey, result) -> {
+            if (requestKey.equals(REQUEST_KEY)) {
+                // 获取返回的数据，需要添加到后端里
+                String userInputSource = result.getString("input_source");
+                String userInputTime = result.getString("input_time");
+                double userInputCredit = result.getDouble("input_credit");
+                CreditMore creditMore = new CreditMore(userInputSource, userInputTime, userInputCredit);
+                creditMoreList.add(creditMore);
+
+                swipeRefreshLayout.setRefreshing(true);
+                // 更新adapter，不需要更改
+                creditMoreAdapter.setCreditMoreList(creditMoreList);
+                creditMoreAdapter.notifyDataSetChanged();
+                // 控制刷新动画结束，不需要更改
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
         // back图表
-        ImageView back = (ImageView) view.findViewById(R.id.query_credits_more_back);
+        ImageView back = (ImageView) view.findViewById(R.id.query_credits_more_add_credit_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

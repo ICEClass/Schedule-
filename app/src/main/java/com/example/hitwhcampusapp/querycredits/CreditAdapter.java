@@ -71,7 +71,7 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
                 if (position != RecyclerView.NO_POSITION) {
                     Credit credit = mCreditList.get(position);
                     MoreDialogFragment moreDialogFragment = new MoreDialogFragment(credit);
-                    moreDialogFragment.show(mFragmentManager, "CustomDialogFragment");
+                    moreDialogFragment.show(mFragmentManager, "MoreDialogFragment");
                 }
             }
         });
