@@ -47,18 +47,18 @@ public class MineFragment extends Fragment {
         // 对用户名，头像等信息进行设置，需要更改
 
         // 头像
-        TextView userImage = (TextView) getActivity().findViewById(R.id.login_logo);
+        TextView userImage = (TextView) view.findViewById(R.id.login_logo);
         userImage.setText("威");
         // 用户名
-        TextView userName = (TextView) getActivity().findViewById(R.id.mine_user_name);
+        TextView userName = (TextView) view.findViewById(R.id.mine_user_name);
         userName.setText("哈哈");
         // 级部专业信息
-        TextView userInformation = (TextView) getActivity().findViewById(R.id.mine_user_information);
+        TextView userInformation = (TextView) view.findViewById(R.id.mine_user_information);
         userInformation.setText("2023级" + " " + "软件工程");
 
         // 添加列表，其中需要更改的选择逻辑在MineAdapter，不需要更改
         initMines();
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.mine_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.mine_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -67,7 +67,7 @@ public class MineFragment extends Fragment {
 
         // 对按钮进行逻辑设置，需要更改
         // 设置按钮
-        TextView settings = (TextView) getActivity().findViewById(R.id.mine_settings);
+        TextView settings = (TextView) view.findViewById(R.id.mine_settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +76,7 @@ public class MineFragment extends Fragment {
         });
 
         // 夜间按钮
-        TextView nights = (TextView) getActivity().findViewById(R.id.mine_nights);
+        TextView nights = (TextView) view.findViewById(R.id.mine_nights);
         nights.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

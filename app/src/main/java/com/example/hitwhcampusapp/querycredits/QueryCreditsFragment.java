@@ -70,14 +70,14 @@ public class QueryCreditsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // 对右上角用户头像UI进行更改，需要根据用户登录状态等来更改
-        TextView userImage = (TextView) getActivity().findViewById(R.id.query_credits_user_image);
+        TextView userImage = (TextView) view.findViewById(R.id.query_credits_user_image);
         userImage.setText("威");
 
         // 初始化学分数据，这个函数内部需要更改
         initCreditList();
 
         // 设置spinner，不需要更改
-        Spinner spinner = (Spinner) getActivity().findViewById(R.id.query_credits_spinner);
+        Spinner spinner = (Spinner) view.findViewById(R.id.query_credits_spinner);
         List<String> options = new ArrayList<>(); // 倒序，不需要更改
         options.add(CURRENT_TERM);
         if (currentTerm - 1 >= 1) options.add(LAST_TERM);
@@ -104,15 +104,15 @@ public class QueryCreditsFragment extends Fragment {
         });
 
         // 设置列表的RecyclerView，不需要更改
-        recyclerView = (RecyclerView) getActivity().findViewById(R.id.query_credits_recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.query_credits_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        creditAdapter = new CreditAdapter(getActivity(), creditList, selectTerm);
+        creditAdapter = new CreditAdapter(getActivity(), getParentFragmentManager(), creditList, selectTerm);
         recyclerView.setAdapter(creditAdapter);
 
         // 设置下拉刷新功能，不需要更改
-        swipeRefreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.query_credits_swipe_refresh_layout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.query_credits_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

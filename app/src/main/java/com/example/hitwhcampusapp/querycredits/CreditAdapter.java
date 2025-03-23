@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hitwhcampusapp.R;
@@ -24,6 +25,7 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
     private Context mContext;
     private List<Credit> mCreditList;
     private int mSelectTerm;
+    private FragmentManager mFragmentManager;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         View creditView;
@@ -43,10 +45,11 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
             creditProgress = (TextView) view.findViewById(R.id.credit_item_progress);
         }
     }
-    public CreditAdapter(Context context, List<Credit> creditList, int selectTerm) {
+    public CreditAdapter(Context context, FragmentManager fragmentManager, List<Credit> creditList, int selectTerm) {
         mContext = context;
         mCreditList = creditList;
         mSelectTerm = selectTerm;
+        mFragmentManager = fragmentManager;
     }
 
     public void setSelectTerm(int selectTerm) {
@@ -64,7 +67,12 @@ public class CreditAdapter extends RecyclerView.Adapter<CreditAdapter.ViewHolder
         moreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int position = holder.getBindingAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Credit credit = mCreditList.get(position);
+                    MoreDialogFragment moreDialogFragment = new MoreDialogFragment(credit);
+                    moreDialogFragment.show(mFragmentManager, "CustomDialogFragment");
+                }
             }
         });
 

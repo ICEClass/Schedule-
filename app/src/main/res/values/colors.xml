@@ -9,4 +9,5 @@
     <color name="red">#E4190E</color>
     <color name="my_theme">#6EBFF8</color>
     <color name="background">#EAEFF2</color>
+    <color name="my_theme_shallow">#E4FCFC</color>
 </resources>
