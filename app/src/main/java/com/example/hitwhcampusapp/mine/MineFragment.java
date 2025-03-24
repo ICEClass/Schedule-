@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.hitwhcampusapp.R;
@@ -78,6 +79,16 @@ public class MineFragment extends Fragment {
         // 夜间按钮
         TextView nights = (TextView) view.findViewById(R.id.mine_nights);
         nights.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        // 切换账号
+        Button changeUser = (Button) view.findViewById(R.id.mine_change_user);
+        changeUser.bringToFront();
+        changeUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
